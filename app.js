@@ -20,7 +20,6 @@ db.once('open', function() {
 
 var indexRouter = require('./routes/index');
 var newsRouter = require('./routes/news');
-var quizRouter = require('./routes/quiz');
 var adminRouter = require('./routes/admin');
 
 
@@ -49,7 +48,6 @@ app.use(function(req, res, next){
 
 app.use('/', indexRouter);
 app.use('/news', newsRouter);
-app.use('/quiz', quizRouter);
 app.use('/admin', adminRouter);
 
 
