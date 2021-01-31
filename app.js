@@ -6,6 +6,18 @@ var cookieParser = require('cookie-parser');//ussles in project but will stay he
 var logger = require('morgan');
 
 var config  = require('./config')
+const mongoose = require('mongoose');
+
+mongoose.connect(config.db, {useNewUrlParser: true
+}); //set link to cennect to db
+
+const db = mongoose.connection;// connect to database if not throw err
+db.on('error', console.error.bind(console, 'Database connection error'));
+db.once('open', function() {
+  console.log("Database connected");
+});
+
+
 var indexRouter = require('./routes/index');
 var newsRouter = require('./routes/news');
 var quizRouter = require('./routes/quiz');
@@ -20,7 +32,7 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
